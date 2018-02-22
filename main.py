@@ -1,30 +1,40 @@
 
-from prepData import *
-from rnnModel import *
+import time
+import sys
+import random as rnd
+from twitterBot import *
 
+sleepTimes = [ 225, 450, 900, 1800, 3600, 7200, 14400 ]
 
-batchSize = 64
-nh = 64
+batchSize = 128
+nh = 140
 nl = 1
-nEpoch = 20
-
+nEpochs = 1
 
 if __name__ == "__main__":
 
-    X, c2i, i2c = genData( "trump.json" )
+    assert len(sys.argv) == 3, "Invalid command line arguments."
 
-    nChars = len(c2i)
+    if (sys.argv[1] == "train"):
+        bot = TwitterBot( sys.argv[2], True )
 
-    model = genModel( nChars + 3, nHidden = nh, numLayers = nl )
+        bot.trainBot( batchSize = batchSize, nEpochs = nEpochs )
 
-    model.fit_generator( genBatches( X, nChars + 3, batchSize ),
-                           steps_per_epoch = len(X)/batchSize,
-                           epochs = nEpoch )
+        bot.save("./weights/trained.hdf5")
 
-    print "Sample output:\n"
+    elif (sys.argv[1] == "tweet"):
+        bot = TwitterBot( sys.argv[2], False )
+        bot.load( "./weights/trained.hdf5" )
 
-    for i in range(5):
-        coded = genCodedText( model, nChars, phraseLen = 282 )
+        while (True):
 
-        print decodeString( coded, i2c, nChars, nChars + 1, nChars + 2 ), "\n"
+            tweet = bot.genTweet()
+            bot.sendTweet( tweet )
+
+            print "Posted tweet:\n   ", tweet
+
+            time.sleep( rnd.choice(sleepTimes) )
+
+    else:
+        print ( "Invalid argument, must be either 'tweet' or 'train'." )
 

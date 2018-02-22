@@ -53,7 +53,7 @@ class TwitterBot(object):
 
         if (self.trainable):
             self.model.fit_generator( genBatches( self.data, self.nChars + 3, batchSize ),
-                                         steps_per_epoch = len(X)/batchSize, epochs = nEpochs )
+                                         steps_per_epoch = len(self.data)/batchSize, epochs = nEpochs )
         else:
             print "TwitterBot object was not created to be trainable."
 
@@ -63,7 +63,7 @@ class TwitterBot(object):
 
         return decodeString( coded, self.i2c, self.nChars, self.nChars + 1, self.nChars + 2 )
 
-    def tweet( self, line ):
+    def sendTweet( self, line ):
 
         self.api.update_status(line)
 
