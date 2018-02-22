@@ -3,9 +3,10 @@ from prepData import *
 from rnnModel import *
 
 
-batchSize = 16
+batchSize = 64
 nh = 64
 nl = 1
+nEpoch = 20
 
 
 if __name__ == "__main__":
@@ -18,9 +19,12 @@ if __name__ == "__main__":
 
     model.fit_generator( genBatches( X, nChars + 3, batchSize ),
                            steps_per_epoch = len(X)/batchSize,
-                           epochs = 10 )
+                           epochs = nEpoch )
 
-    coded = genCodedText( model, nChars, phraselen = 282 )
+    print "Sample output:\n"
 
-    print decodeString( coded, i2c, nChars, nChars + 1, nChars + 2 )
+    for i in range(5):
+        coded = genCodedText( model, nChars, phraseLen = 282 )
+
+        print decodeString( coded, i2c, nChars, nChars + 1, nChars + 2 ), "\n"
 

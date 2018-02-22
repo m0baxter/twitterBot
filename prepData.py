@@ -35,7 +35,7 @@ def decodeString( enc, int2Char, start, end, pad ):
 
     for i in enc:
         if (not i in [start, end, pad]):
-            result += i2c[i]
+            result += int2Char[i]
 
     return result
 

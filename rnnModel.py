@@ -1,10 +1,14 @@
 
+import sys
+stderr = sys.stderr
+sys.stderr = open(os.devnull, 'w')
 from keras.models import Sequential, Model
 from keras.layers import Dense, Activation, Dropout
 from keras.layers import LSTM, Input, Bidirectional, TimeDistributed
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
 from keras.metrics import categorical_accuracy
+sys.stderr = stderr
 import numpy as np
 
 
@@ -25,22 +29,24 @@ def genModel( nChars, nHidden, numLayers = 1 ):
 
     return model
 
-def genCodedText( model, nChars, phraselen = 282 ):
+def genCodedText( model, nChars, phraseLen = 282 ):
     """Generates a phrase given of length phraseLen. Starts from a random character."""
 
     x = np.zeros( (1, phraseLen, nChars + 3) )
-    x[1, 0, :][nChars] = 1 #make first character the start character.
+    x[0, 0, :][nChars] = 1 #make first character the start character.
 
-    xi = [ np.random.randint(nChars) ]
+    xi = nChars 
 
-    phrase = [start, xi]
+    phrase = [nChars ]
 
-    for i in range(1, phraseLen):
-        X[0, i, :][xi[-1]] = 1
+    for i in range(phraseLen):
+        x[0, i, :][xi] = 1
 
-        xi = np.argmax( model.predict(X[:, :i+1, :])[0], 1 )
+        probDist = model.predict(x[:, :i+1, :])[0, i]
 
-        phrase.append( xi[-1] )
+        xi = np.random.choice( range(nChars + 3), p = probDist.ravel())
+
+        phrase.append( xi )
 
     return phrase
 
