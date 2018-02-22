@@ -1,5 +1,6 @@
 
 import sys
+import os
 stderr = sys.stderr
 sys.stderr = open(os.devnull, 'w')
 from keras.models import Sequential, Model

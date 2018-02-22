@@ -103,6 +103,7 @@ ENV/
 
 #data file that may or may not be distributable:
 trump.json
+*.auth
 
 #vim stuff:
 *.swp
