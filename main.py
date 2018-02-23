@@ -2,7 +2,7 @@
 import time
 import sys
 import random as rnd
-from twitterBot import *
+from src.twitterBot import *
 
 sleepTimes = [ 225, 450, 900, 1800, 3600, 7200, 14400 ]
 
@@ -18,11 +18,7 @@ if __name__ == "__main__":
     if (sys.argv[1] == "train"):
 
         bot = TwitterBot( sys.argv[2], True, nHidden = nh, numLayers = nl )
-
-        #print bot.model.summary()
-
         bot.trainBot( batchSize = batchSize, nEpochs = nEpochs )
-
         bot.save("./weights/trained.hdf5")
 
     elif (sys.argv[1] == "tweet"):
