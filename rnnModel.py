@@ -1,15 +1,10 @@
 
-import sys
-import os
-stderr = sys.stderr
-sys.stderr = open(os.devnull, 'w')
-from keras.models import Sequential, Model
+from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
-from keras.layers import LSTM, Input, Bidirectional, TimeDistributed
-from keras.optimizers import Adam
-from keras.callbacks import EarlyStopping
-from keras.metrics import categorical_accuracy
-sys.stderr = stderr
+from keras.layers import LSTM, Bidirectional, TimeDistributed
+#from keras.optimizers import Adam
+#from keras.callbacks import EarlyStopping
+#from keras.metrics import categorical_accuracy
 import numpy as np
 
 
@@ -36,7 +31,7 @@ def genCodedText( model, nChars, phraseLen = 282 ):
     x = np.zeros( (1, phraseLen, nChars + 3) )
     x[0, 0, :][nChars] = 1 #make first character the start character.
 
-    xi = nChars 
+    xi = nChars
 
     phrase = [nChars ]
 

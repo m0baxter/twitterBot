@@ -5,26 +5,26 @@ from rnnModel import *
 
 
 class TwitterBot(object):
-    
+
     def __init__(self, dataPath, trainable, nHidden = 140, numLayers = 1):
-        
+
         X, c2i, i2c = genData( dataPath )
         self.data = None
         self.trainable = trainable
-        
+
         if (trainable):
             self.data = X
-            
+
         self.c2i = c2i
         self.i2c = i2c
         self.nChars = len(c2i)
         self.model = genModel( self.nChars + 3, nHidden = nHidden, numLayers = numLayers )
-        
+
         consumerKey, consumerSecret, userToken, userSecret = self.__readTokens()
         auth = twp.OAuthHandler(consumerKey, consumerSecret)
         auth.set_access_token( userToken, userSecret)
         self.api = twp.API(auth)
-        
+
     def __readTokens(self):
         """Reads the authentication file."""
 
@@ -38,10 +38,10 @@ class TwitterBot(object):
         except (ValueError, IOError):
             print ("Could not find valid twitter authentication tokens.")
 
-                            
+
     def load(self, path):
         """Loads a pretrained model from path."""
-        
+
         self.model.load_weights( path )
 
     def save(self, path):
