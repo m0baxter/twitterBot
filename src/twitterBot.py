@@ -2,11 +2,13 @@
 import tweepy as twp
 from prepData import *
 from rnnModel import *
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 
 class TwitterBot(object):
 
-    def __init__(self, dataPath, trainable, online = True, nHidden = 140, numLayers = 1):
+    def __init__( self, dataPath, trainable, online = True,
+                  nHidden = 140, numLayers = 1, savePath = "weights.hdf5" ):
 
         X, c2i, i2c = genData( dataPath )
         self.data = None
@@ -22,7 +24,7 @@ class TwitterBot(object):
 
         self.api = None
 
-        if (online = True):
+        if (online == True):
             consumerKey, consumerSecret, userToken, userSecret = self.__readTokens()
             auth = twp.OAuthHandler(consumerKey, consumerSecret)
             auth.set_access_token( userToken, userSecret)
@@ -51,17 +53,25 @@ class TwitterBot(object):
 
         self.model.save_weights( path )
 
-    def trainBot(self, batchSize = 64, nEpochs = 100):
+    def trainBot(self, batchSize = 64, nEpochs = 100, savePath = "weights.hdf5"):
 
         losses = None
 
         if (self.trainable):
-            losses = self.model.fit_generator( genBatches( self.data, self.nChars + 3, batchSize ),
-                                    steps_per_epoch = len(self.data)/batchSize, epochs = nEpochs )
+            train, val = splitData( self.data, 0.2 )
+
+            earlyStoper  = EarlyStopping( patience = 100 )
+            checkPointer = ModelCheckpoint( filepath = savePath, verbose = 1, save_best_only=True)
+
+            losses = self.model.fit_generator( genBatches( train, self.nChars + 3, batchSize ),
+                                    steps_per_epoch = len(train)/batchSize, epochs = nEpochs,
+                                    validation_data = genBatches( val, self.nChars + 3, batchSize ),
+                                    validation_steps = len(val)/batchSize,
+                                    callbacks = [earlyStoper, checkPointer] )
         else:
             print "TwitterBot object was not created to be trainable."
 
-        return losses.history["loss"]
+        return losses.history
 
     def genTweet(self, rnd = 1.0):
 

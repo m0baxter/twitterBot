@@ -10,9 +10,12 @@ python main.py $mode $file
 
 where file is the location of a `json` formatted file of tweet data.
 
+It should be noted thateven without Twitter authentication keys training and testing are possible. This
+is achieved by setting the the `online` argument of the `TwitterBot` constructor to `False`.
+
 ## Training
 `main.py` contains sample parameters used to train a twitter bot on  tweet data from the [Trump Twitter
-Archive](http://www.trumptwitterarchive.com/archive). A beyond changing all occurrences of `&amp;` to
+Archive](http://www.trumptwitterarchive.com/archive). Beyond changing all occurrences of `&amp;` to
 `&` in tweet data no further preprocessing of the data took place. Sample weights obtained from training
 are provided in `./weights`.
 
@@ -22,7 +25,7 @@ is necessary to change run the bot with anything other than the default paramete
 
 ## Testing
 Running the code in test mode will generate five sample tweets. The level of randomness in may be
-controlled using the parameter passed to the method `TwitterBot.genTweet()` (0 being completely
+controlled using the parameter passed to the method `TwitterBot.genTweet()` (0.0 being completely
 deterministic and 1.0 sampling the probability distribution at each time step).
 
 ## Tweeting
@@ -38,5 +41,5 @@ Access Token Secret
 
 The application must be given write access for tweets to be automatically posted.
 
-A sample of the twitter bot in action can be found [here](https://mobile.twitter.com/trumptron9000).
+A sample of the twitter bot in action can be found [here](https://twitter.com/trumptron9000).
 

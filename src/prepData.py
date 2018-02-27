@@ -69,6 +69,16 @@ def genData( path ):
 
     return X, c2i, i2c
 
+def splitData( X, valFrac ):
+    """Splits the data into training and validation sets. valFrac is the fraction of total
+       that makes up the validation set."""
+    
+    n = len(X)
+    inds = np.random.permutation( len(X) )
+    trainInds, valInds = inds[ : -int(n*valFrac) ], inds[ -int(n*valFrac) : ]
+    
+    return ( X[ trainInds ], X[ valInds ] )
+
 def genBatches( X, numClasses, batchSize = 16 ):
     """Generator of one-hot encoded batches for training."""
 

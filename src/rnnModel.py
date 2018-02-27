@@ -2,8 +2,6 @@
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Dropout
 from keras.layers import LSTM, TimeDistributed
-from keras.optimizers import Adam
-#from keras.callbacks import EarlyStopping
 import random as rnd
 import numpy as np
 
@@ -22,9 +20,7 @@ def genModel( nChars, nHidden, numLayers = 1 ):
     model.add( TimeDistributed( Dense(nChars) ) )
     model.add( Activation('softmax') )
 
-    opt = Adam( amsgrad = True )
-
-    model.compile( loss = "categorical_crossentropy", optimizer = opt )
+    model.compile( loss = "categorical_crossentropy", optimizer = "adam" )
 
     return model
 

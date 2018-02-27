@@ -8,10 +8,10 @@ from src.twitterBot import *
 
 sleepTimes = [ 225, 450, 900, 1800, 3600, 7200, 14400 ]
 
-batchSize = 1024 #1024
-nh = 256 #should this be 280?
-nl = 1 #2
-nEpochs = 2400
+batchSize = 1024
+nh = 256
+nl = 1
+nEpochs = 3000
 matplotlib.rcParams.update({'font.size': 24, 'text.usetex': True})
 
 
@@ -19,9 +19,13 @@ def plotLosses( losses ):
     """Plots training loss as a fucntion of epoch."""
 
     fig = plt.figure(1, figsize = (18,10))
-    plt.plot( range(1, len(losses) + 1), losses, "b-", linewidth = 3)
-    plt.ylabel("$\mathrm{Training}$ $\mathrm{Loss}$")
+    plt.plot( range(1, len(losses["loss"]) + 1), losses["loss"], "b-",
+              linewidth = 3, label = "$\mathrm{training}$")
+    plt.plot( range(1, len(losses["val_loss"]) + 1), losses["val_loss"], "g-",
+              linewidth = 3, label = "$\mathrm{validation}$")
+    plt.ylabel("$\mathrm{Loss}$")
     plt.xlabel("$\mathrm{Epoch}$")
+    plt.legend( loc = "best" )
     fig.savefig( "lossPlot.eps", format = 'eps', dpi = 20000, bbox_inches='tight' )
 
     return
@@ -35,11 +39,13 @@ if __name__ == "__main__":
 
         bot = TwitterBot( sys.argv[2], True, nHidden = nh, numLayers = nl )
 
+        print bot.model.summary()
+
         #Uncomment to continue training:
         #bot.load( "./weights/trained.hdf5" )
 
-        losses = bot.trainBot( batchSize = batchSize, nEpochs = nEpochs )
-        bot.save("./weights/trained.hdf5")
+        losses = bot.trainBot( batchSize = batchSize, nEpochs = nEpochs,
+                               savePath = "./weights/trained.hdf5" )
 
         plotLosses( losses )
 
