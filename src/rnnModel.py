@@ -16,7 +16,6 @@ def genModel( nChars, nHidden, numLayers = 1 ):
     for _ in range( numLayers - 1 ):
         model.add( LSTM( nHidden, return_sequences = True) )
 
-    model.add( Dropout(0.4) )
     model.add( TimeDistributed( Dense(nChars) ) )
     model.add( Activation('softmax') )
 

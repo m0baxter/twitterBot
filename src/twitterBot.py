@@ -60,7 +60,7 @@ class TwitterBot(object):
         if (self.trainable):
             train, val = splitData( self.data, 0.2 )
 
-            earlyStoper  = EarlyStopping( patience = 100 )
+            earlyStoper  = EarlyStopping( patience = 50 )
             checkPointer = ModelCheckpoint( filepath = savePath, verbose = 1, save_best_only=True)
 
             losses = self.model.fit_generator( genBatches( train, self.nChars + 3, batchSize ),

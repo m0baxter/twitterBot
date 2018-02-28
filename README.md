@@ -10,8 +10,8 @@ python main.py $mode $file
 
 where file is the location of a `json` formatted file of tweet data.
 
-It should be noted thateven without Twitter authentication keys training and testing are possible. This
-is achieved by setting the the `online` argument of the `TwitterBot` constructor to `False`.
+It should be noted that even without Twitter authentication keys training and testing are possible. This
+is achieved by setting the `online` argument of the `TwitterBot` constructor to `False`.
 
 ## Training
 `main.py` contains sample parameters used to train a twitter bot on  tweet data from the [Trump Twitter
@@ -19,9 +19,11 @@ Archive](http://www.trumptwitterarchive.com/archive). Beyond changing all occurr
 `&` in tweet data no further preprocessing of the data took place. Sample weights obtained from training
 are provided in `./weights`.
 
-If desired one may change the parameters defining the RNN architecture. The most relevant parameters are
-`nl` and `nh` which control the number and size of LSTM units used. It should be noted that retraining
-is necessary to change run the bot with anything other than the default parameters.
+If desired one may change the parameters defining the
+<span style="font-variant:small-caps;">rnn</span> architecture. The most relevant parameters are
+`nl` and `nh` which control the number and size of
+<span style="font-variant:small-caps;">lstm</span> units used. It should be noted that retraining is
+necessary to change run the bot with anything other than the default parameters.
 
 ## Testing
 Running the code in test mode will generate five sample tweets. The level of randomness in may be

@@ -8,9 +8,9 @@ from src.twitterBot import *
 
 sleepTimes = [ 225, 450, 900, 1800, 3600, 7200, 14400 ]
 
-batchSize = 1024
+batchSize = 512
 nh = 256
-nl = 1
+nl = 2
 nEpochs = 3000
 matplotlib.rcParams.update({'font.size': 24, 'text.usetex': True})
 
