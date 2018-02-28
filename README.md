@@ -20,9 +20,9 @@ Archive](http://www.trumptwitterarchive.com/archive). Beyond changing all occurr
 are provided in `./weights`.
 
 If desired one may change the parameters defining the
-<span style="font-variant:small-caps;">rnn</span> architecture. The most relevant parameters are
+<span style="font-variant:small-caps;">RNN</span> architecture. The most relevant parameters are
 `nl` and `nh` which control the number and size of
-<span style="font-variant:small-caps;">lstm</span> units used. It should be noted that retraining is
+<span style="font-variant:small-caps;">LSTM</span> units used. It should be noted that retraining is
 necessary to change run the bot with anything other than the default parameters.
 
 ## Testing
