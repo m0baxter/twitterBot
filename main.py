@@ -8,9 +8,9 @@ from src.twitterBot import *
 
 sleepTimes = [ 225, 450, 900, 1800, 3600, 7200, 14400 ]
 
-batchSize = 512
+batchSize = 256
 nh = 256
-nl = 2
+nl = 3
 nEpochs = 3000
 matplotlib.rcParams.update({'font.size': 24, 'text.usetex': True})
 
@@ -66,10 +66,11 @@ if __name__ == "__main__":
     elif (sys.argv[1] == "test"):
 
         bot = TwitterBot( sys.argv[2], False, nHidden = nh, numLayers = nl )
+        print bot.model.summary()
         bot.load( "./weights/trained.hdf5" )
 
         for _ in range(5):
-            print "Sample tweet:\n   ", bot.genTweet( 1.0 ), "\n"
+            print "Sample tweet:\n   ", bot.genTweet( rnd.random() ), "\n"
 
     else:
         print ( "Invalid argument, must be either 'tweet', 'train', or 'test'." )
