@@ -8,10 +8,10 @@ the code may be run by calling
 python main.py $mode $file
 ```
 
-where file is the location of a `json` formatted file of tweet data.
+where `file` is the location of a `json` formatted file of tweet data.
 
 ## Training
-`main.py` contains sample parameters used to train a twitter bot on  tweet data from the [Trump Twitter
+`main.py` contains sample parameters used to train a twitter bot on tweet data from the [Trump Twitter
 Archive](http://www.trumptwitterarchive.com/archive). Beyond changing all occurrences of `&amp;` to
 `&` in tweet data no further preprocessing of the data took place. Sample weights obtained from training
 are provided in `./weights`.
@@ -21,9 +21,8 @@ If desired one may change the parameters defining the RNN architecture. The most
 is necessary to change run the bot with anything other than the default parameters.
 
 ## Testing
-Running the code in test mode will generate five sample tweets. The level of randomness in may be
-controlled using the parameter passed to the method `TwitterBot.genTweet()` (0.0 being completely
-deterministic and 1.0 sampling the probability distribution at each time step).
+Running the code in test mode will generate five sample tweets. The level of randomness in tweet generation may be controlled using the parameter passed to the method `TwitterBot.genTweet()` (0.0 being
+completely deterministic and 1.0 sampling the probability distribution at each time step).
 
 ## Tweeting
 To run the twitter bot one must obtain authorization credentials. Once this is done create place them

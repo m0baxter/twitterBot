@@ -10,7 +10,7 @@ def removeURL( s ):
     keep = []
 
     for w in s.split():
-        if (not "http" in w):
+        if ( not "http" in w ):
             keep.append(w)
 
     return " ".join(keep)
@@ -34,7 +34,7 @@ def decodeString( enc, int2Char, start, end, pad ):
     result = ""
 
     for i in enc:
-        if (not i in [start, end, pad]):
+        if ( not i in [start, end, pad] ):
             result += int2Char[i]
 
     return result
@@ -86,7 +86,7 @@ def genBatches( X, numClasses, batchSize = 16 ):
         inds = np.random.permutation( len(X) )
 
         for start in range(0, len(X) - 1, batchSize):
-            temp = to_categorical(X[ inds[start : start + batchSize] ])
+            temp = to_categorical( X[ inds[start : start + batchSize] ] )
             batchX = temp[ : ,   : -1, : ]
             batchY = temp[ : , 1 :   , : ]
 
