@@ -109,3 +109,6 @@ trump.json
 *.swp
 *.swo
 
+#images:
+*.pdf
+
