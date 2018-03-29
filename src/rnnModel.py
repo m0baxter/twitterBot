@@ -32,14 +32,14 @@ def genCodedText( model, nChars, phraseLen = 282, rndLevel = 1.0 ):
 
     xi = nChars
 
-    phrase = [nChars ]
+    phrase = [ nChars ]
 
     for i in range(phraseLen):
         x[0, i, :][xi] = 1
 
         probDist = model.predict(x[:, :i+1, :])[0, i]
 
-        if ( rnd.random() < rndLevel):
+        if ( rnd.random() < rndLevel ):
             xi = np.random.choice( range(nChars + 3), p = probDist.ravel())
 
         else:

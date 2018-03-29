@@ -6,7 +6,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from src.twitterBot import *
 
-sleepTimes = [ 225, 450, 900, 1800, 3600, 7200, 14400 ]
+sleepTimes = [ 1800, 3600, 7200, 14400 ]
 
 batchSize = 256
 nh = 256
