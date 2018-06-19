@@ -68,6 +68,7 @@ class TwitterBot(object):
                                     validation_data = genBatches( val, self.nChars + 3, batchSize ),
                                     validation_steps = len(val)/batchSize,
                                     callbacks = [earlyStoper, checkPointer] )
+
         else:
             print "TwitterBot object was not created to be trainable."
 
