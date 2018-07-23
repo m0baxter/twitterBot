@@ -70,7 +70,7 @@ if __name__ == "__main__":
         bot.load( "./weights/trained.hdf5" )
 
         for _ in range(5):
-            print "Sample tweet:\n   ", bot.genTweet( rnd.random() ), "\n"
+            print "\n\nSample tweet:\n   ", bot.genTweet( rnd.random() ), "\n"
 
     else:
         print ( "Invalid argument, must be either 'tweet', 'train', or 'test'." )
