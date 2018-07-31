@@ -59,7 +59,7 @@ if __name__ == "__main__":
             tweet = bot.genTweet()
             bot.sendTweet( tweet )
 
-            print "Posted tweet:\n   ", tweet
+            print "\n\nPosted tweet:\n   ", tweet
 
             time.sleep( rnd.choice(sleepTimes) )
 
