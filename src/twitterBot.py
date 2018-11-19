@@ -8,7 +8,8 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 class TwitterBot(object):
 
     def __init__( self, dataPath, trainable, online = True,
-                  nHidden = 140, numLayers = 1, savePath = "weights.hdf5" ):
+                  nHidden = 140, numLayers = 1, dropout = 0.5, recurrent_dropout = 0.5,
+                  savePath = "weights.hdf5" ):
 
         X, c2i, i2c = genData( dataPath )
         self.data = None
@@ -20,7 +21,8 @@ class TwitterBot(object):
         self.c2i = c2i
         self.i2c = i2c
         self.nChars = len(c2i)
-        self.model = genModel( self.nChars + 3, nHidden = nHidden, numLayers = numLayers )
+        self.model = genModel( self.nChars + 3, nHidden = nHidden, numLayers = numLayers,
+                               dropout = dropout, recurrent_dropout = recurrent_dropout )
 
         self.api = None
 

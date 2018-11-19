@@ -11,6 +11,8 @@ sleepTimes = [ 1800, 3600, 7200, 14400 ]
 batchSize = 256
 nh = 256
 nl = 3
+do = 0.25
+rdo = 0.25
 nEpochs = 3000
 matplotlib.rcParams.update({'font.size': 24, 'text.usetex': True})
 
@@ -37,7 +39,8 @@ if __name__ == "__main__":
 
     if (sys.argv[1] == "train"):
 
-        bot = TwitterBot( sys.argv[2], True, nHidden = nh, numLayers = nl )
+        bot = TwitterBot( sys.argv[2], True, nHidden = nh, numLayers = nl,
+                          dropout = do, recurrent_dropout = rdo )
 
         print bot.model.summary()
 

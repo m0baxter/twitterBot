@@ -6,15 +6,17 @@ import random as rnd
 import numpy as np
 
 
-def genModel( nChars, nHidden, numLayers = 1 ):
+def genModel( nChars, nHidden, numLayers = 1, dropout = 0.5, recurrent_dropout = 0.5 ):
     """Generates the RNN model with nChars characters and numLayers hidden units with
        dimension nHidden."""
 
     model = Sequential()
-    model.add( LSTM( nHidden, input_shape = (None, nChars), return_sequences = True ) )
+    model.add( LSTM( nHidden, input_shape = (None, nChars), return_sequences = True,
+                     dropout = dropout, recurrent_dropout = recurrent_dropout ) )
 
     for _ in range( numLayers - 1 ):
-        model.add( LSTM( nHidden, return_sequences = True) )
+        model.add( LSTM( nHidden, return_sequences = True,
+                         dropout = dropout, recurrent_dropout = recurrent_dropout ) )
 
     model.add( TimeDistributed( Dense(nChars) ) )
     model.add( Activation('softmax') )
