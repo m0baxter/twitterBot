@@ -42,7 +42,7 @@ if __name__ == "__main__":
         bot = TwitterBot( sys.argv[2], True, nHidden = nh, numLayers = nl,
                           dropout = do, recurrent_dropout = rdo )
 
-        print bot.model.summary()
+        print( bot.model.summary() )
 
         #Uncomment to continue training:
         #bot.load( "./weights/trained.hdf5" )
@@ -62,18 +62,18 @@ if __name__ == "__main__":
             tweet = bot.genTweet()
             bot.sendTweet( tweet )
 
-            print "\n\nPosted tweet:\n   ", tweet
+            print( "\n\nPosted tweet:\n   ", tweet )
 
             time.sleep( rnd.choice(sleepTimes) )
 
     elif (sys.argv[1] == "test"):
 
         bot = TwitterBot( sys.argv[2], False, nHidden = nh, numLayers = nl )
-        print bot.model.summary()
+        print (bot.model.summary() )
         bot.load( "./weights/trained.hdf5" )
 
         for _ in range(5):
-            print "\n\nSample tweet:\n   ", bot.genTweet( rnd.random() ), "\n"
+            print( "\n\nSample tweet:\n   ", bot.genTweet( rnd.random() ), "\n" )
 
     else:
         print ( "Invalid argument, must be either 'tweet', 'train', or 'test'." )

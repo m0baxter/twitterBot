@@ -26,7 +26,7 @@ def charIntMaps( chars ):
 def encodeString( s, char2Int, start, end, pad, maxLen = 280 ):
     """encodes a string into integers."""
 
-    return [start] + map( lambda x : char2Int[x], s) + [end] + (maxLen - len(s))*[pad]
+    return [start] + list( map( lambda x : char2Int[x], s) ) + [end] + (maxLen - len(s))*[pad]
 
 def decodeString( enc, int2Char, start, end, pad ):
     """Decodes a string from integers to characters."""

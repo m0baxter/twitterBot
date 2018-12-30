@@ -1,7 +1,7 @@
 
 import tweepy as twp
-from prepData import *
-from rnnModel import *
+from src.prepData import *
+from src.rnnModel import *
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 
@@ -43,7 +43,7 @@ class TwitterBot(object):
                 return consumerKey, consumerSecret, userToken, userSecret
 
         except ( ValueError, IOError ):
-            print ("Could not find valid twitter authentication tokens.")
+            print( "Could not find valid twitter authentication tokens." )
 
     def load( self, path ):
         """Loads a pretrained model from path."""
@@ -72,7 +72,7 @@ class TwitterBot(object):
                                     callbacks = [earlyStoper, checkPointer] )
 
         else:
-            print "TwitterBot object was not created to be trainable."
+            print( "TwitterBot object was not created to be trainable." )
 
         return losses.history
 
